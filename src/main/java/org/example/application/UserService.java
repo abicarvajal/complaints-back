@@ -15,7 +15,7 @@ public class UserService {
 
     public ResponseEntity<UserEntity> getUserByIdentification(String identification) {
         try {
-            UserEntity user = userRepository.getUser(identification);
+            UserEntity user = userRepository.findByIdentification(identification);
             if (user == null) {
                 throw new UserNotFoundException("User not found with identification: " + identification);
             }
