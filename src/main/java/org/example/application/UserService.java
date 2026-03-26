@@ -1,11 +1,9 @@
 package org.example.application;
 
-import org.example.domain.IUserRepository;
+import org.example.domain.entity.UserEntity;
+import org.example.domain.interfaces.IUserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class UserService {
@@ -15,18 +13,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<Map<String,String>> getUserByIdentification(String identification) {
+    public ResponseEntity<UserEntity> getUserByIdentification(String identification) {
         try {
-            String name = userRepository.getUserNameById(identification);
-            if (name == null) {
+            UserEntity user = userRepository.getUser(identification);
+            if (user == null) {
                 throw new UserNotFoundException("User not found with identification: " + identification);
             }
-            Map<String, String> response = new HashMap<>();
-            response.put("identification", identification);
-            response.put("name", name);
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok(user);
         } catch (UserNotFoundException e) {
-            throw e; // Let the GlobalExceptionHandler handle this exception
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("An unexpected error occurred while retrieving user information.", e);
         }

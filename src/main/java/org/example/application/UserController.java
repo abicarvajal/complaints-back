@@ -1,11 +1,10 @@
 package org.example.application;
 
+import org.example.domain.entity.UserEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @RestController
 public class UserController {
@@ -16,7 +15,9 @@ public class UserController {
         }
 
         @GetMapping("/user")
-        public ResponseEntity<Map<String,String>> getUserByIdentification(@RequestParam String identification) {
+        public ResponseEntity<UserEntity> getUserByIdentification(@RequestParam String identification) {
             return userService.getUserByIdentification(identification);
         }
+
+
 }
