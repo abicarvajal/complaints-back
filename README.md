@@ -1,5 +1,5 @@
 # Complaints
-This project was generated using JAVA version 17, Springboot and Maven.
+This project was generated using JAVA version 17, Springboot and Maven to manage complaints and users.
 
 # Important notes
 - All data are saved on runtime H2
